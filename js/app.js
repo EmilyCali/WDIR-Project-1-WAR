@@ -89,22 +89,61 @@ var deck = $("#first-deck");
 //random split of deck making two new divs that have the resulting arrays in them
     var onClickSplitDeck = function() {
       //console.log(starterDeck);
+      deck.hide();
       var playerOneHand = $("<div />").attr("id", "player-one").appendTo("#board");
       var playerTwoHand = $("<div />").attr("id", "player-two").appendTo("#board");
-      //math random
-      //push half to one hand
-      //push the other to the other hand
+      //math random to shuffle deck
+      var cards = [];
+      for (var i = 0; i < starterDeck.length; i++) {
+        cards.push(starterDeck[Math.floor(Math.random()*starterDeck.length)]);
+        //console.log(cards);
+        //return cards;
+        //for (var i = 0; i < 26; i++) {
+        };
+        var handOne = cards.splice(0, 26);
+        $handOne.push(handOne);
+        console.log($handOne);
+
+        var handTwo = cards.splice(0, 26);
+        $handTwo.push(handTwo);
+        console.log($handTwo);
     };
+
+
+
+
+
 deck.on("click", onClickSplitDeck);
 
 //turns
-  //on click show card
-  // create new divs for the cards to move to
-    //compare cards
-      //if players card is more than other players card
-      //if tie make pick more cards
-        //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
+    var onClickShowCard = function() {
+      //on click show card
+      // create new divs for the cards to move to
+        //compare cards
+          //if players card is more than other players card
+          //if tie make pick more cards
+            //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
+    };
 
+
+    // var player1 = {
+    //   wins: 0,
+    //   roundsWon: 0,
+    //   // updateStats: function() {
+    //   //   console.log("Player One has " + this.roundsWon "rounds won and " + this.wins + " wins."),
+    //   // },
+    //   firstHand: function() {
+    //     for (var i = 0; i < starterDeck.length/2; i++) {
+    //       var card = starterDeck[Math.floor(Math.random()*starterDeck.length)];
+    //       $handOne.push(card);
+    //     }
+    //   },
+    //   wonCards: [],
+    //
+    // };
+    //
+    // player1.firstHand();
+    // console.log($handOne);
     // go to other player and repeat above
 
 //check win for rounds
