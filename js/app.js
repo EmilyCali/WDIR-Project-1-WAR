@@ -89,7 +89,9 @@ var deck = $("#first-deck");
 //random split of deck making two new divs that have the resulting arrays in them
     var onClickSplitDeck = function() {
       //console.log(starterDeck);
+      //hides the initial deck div
       deck.hide();
+      //creates the two hands
       var playerOneHand = $("<div />").attr("id", "player-one").appendTo("#board");
       var playerTwoHand = $("<div />").attr("id", "player-two").appendTo("#board");
       //math random to shuffle deck
@@ -97,28 +99,25 @@ var deck = $("#first-deck");
       for (var i = 0; i < starterDeck.length; i++) {
         cards.push(starterDeck[Math.floor(Math.random()*starterDeck.length)]);
         //console.log(cards);
-        //return cards;
-        //for (var i = 0; i < 26; i++) {
         };
+
+        //takes the first half of the cards array and puts it into the first hand
         var handOne = cards.splice(0, 26);
         $handOne.push(handOne);
-        console.log($handOne);
+        //console.log($handOne);
 
+        //takes the last remaining parts of the cards array and put them into the second hand
         var handTwo = cards.splice(0, 26);
         $handTwo.push(handTwo);
-        console.log($handTwo);
+        //console.log($handTwo);
     };
-
-
-
-
-
+//starts the game
 deck.on("click", onClickSplitDeck);
 
 //turns
     var onClickShowCard = function() {
       //on click show card
-      // create new divs for the cards to move to
+
         //compare cards
           //if players card is more than other players card
           //if tie make pick more cards
@@ -126,24 +125,7 @@ deck.on("click", onClickSplitDeck);
     };
 
 
-    // var player1 = {
-    //   wins: 0,
-    //   roundsWon: 0,
-    //   // updateStats: function() {
-    //   //   console.log("Player One has " + this.roundsWon "rounds won and " + this.wins + " wins."),
-    //   // },
-    //   firstHand: function() {
-    //     for (var i = 0; i < starterDeck.length/2; i++) {
-    //       var card = starterDeck[Math.floor(Math.random()*starterDeck.length)];
-    //       $handOne.push(card);
-    //     }
-    //   },
-    //   wonCards: [],
-    //
-    // };
-    //
-    // player1.firstHand();
-    // console.log($handOne);
+
     // go to other player and repeat above
 
 //check win for rounds
@@ -165,3 +147,67 @@ deck.on("click", onClickSplitDeck);
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//AN Idea from THE POKEMON GAME
+// var player1 = {
+//   wins: 0,
+//   roundsWon: 0,
+//   // updateStats: function() {
+//   //   console.log("Player One has " + this.roundsWon "rounds won and " + this.wins + " wins."),
+//   // },
+//   firstHand: function() {
+//     for (var i = 0; i < starterDeck.length/2; i++) {
+//       var card = starterDeck[Math.floor(Math.random()*starterDeck.length)];
+//       $handOne.push(card);
+//     }
+//   },
+//   wonCards: [],
+//
+// };
+//
+// player1.firstHand();
+// console.log($handOne);
