@@ -88,7 +88,9 @@ var deck = $("#first-deck");
 
 //random split of deck making two new divs that have the resulting arrays in them
     var onClickSplitDeck = function() {
-      console.log(starterDeck);
+      //console.log(starterDeck);
+      var playerOneHand = $("<div />").attr("id", "player-one").appendTo("#board");
+      var playerTwoHand = $("<div />").attr("id", "player-two").appendTo("#board");
       //math random
       //push half to one hand
       //push the other to the other hand
