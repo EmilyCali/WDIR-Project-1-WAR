@@ -1,3 +1,38 @@
 body {
   background-color: #C0BABC;
+  text-align: center;
+  margin: auto;
+  padding: 20px;
+  font-family: sans-serif;
+  color: #745B5F;
+}
+
+h1 {
+  color: #5C606B;
+}
+
+h3 {
+  color: #5C606B; 
+}
+
+#board {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+#first-deck {
+  display: flex;
+  width: 300px;
+  height: 450px;
+  background-color: #A99285;
+  position: center;
+  margin: auto;
+  border-radius: 10px;
+}
+
+footer {
+  font-size: 10px;
+  color: #5C606B;
 }
