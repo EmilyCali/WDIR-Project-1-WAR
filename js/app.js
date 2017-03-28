@@ -101,15 +101,20 @@ var deck = $("#first-deck");
         cards.push(starterDeck[Math.floor(Math.random()*starterDeck.length)]);
         //console.log(cards);
         };
+        //THE COMMENTED OUT STUFF IN THIS FUNCTION WAS BECAUSE WE WERE GETTING OBJECTS IN AND ARRAY INSIDE ANOTHER ARRAY
 
         //takes the first half of the cards array and puts it into the first hand
-        var handOne = cards.splice(0, 26);
-        $handOne.push(handOne);
+        //var handOne = cards.splice(0, 26);
+        //$handOne.push(handOne);
+        $handOne = cards.splice(0, 26);
+        //$handOne.push(cards.splice(0, 26));
         //console.log($handOne);
 
         //takes the last remaining parts of the cards array and put them into the second hand
-        var handTwo = cards.splice(0, 26);
-        $handTwo.push(handTwo);
+        //var handTwo = cards.splice(0, 26);
+        //$handTwo.push(handTwo);
+        $handTwo = cards.splice(0, 26);
+        //$handTwo.push(cards.splice(0, 26));
         //console.log($handTwo);
     };
 //starts the game
@@ -118,25 +123,46 @@ var deck = $("#first-deck");
     var compareCards = function() {
       var playerOneWonCards = [];
       var playerTwoWonCards = [];
+
       //compare cards
       //if playerone card is more than playertwo card
-      if ($handOne[0][0].value > $handTwo[0][0].value) {
-          playerOneWonCards.push($handOne[0][0]); //need to hide card after it's been pushed....
-          playerOneWonCards.push($handTwo[0][0]); //use detach to remove from hand array?
-          console.log(playerOneWonCards);
+      if ($handOne[0].value > $handTwo[0].value) {
+        //var wonCardOne = $handOne.splice([0][0]);
+        //console.log(wonCardOne);
+        //var wonCardTwo = $handTwo.splice([0][0]);
+        //console.log(wonCardTwo);
+        playerOneWonCards.push($handOne[0]);
+        //playerOneWonCards = $handOne.splice(0, 1) + $handTwo.splice(0, 1);
+        //need to hide card after it's been pushed....
+        $handOne.shift();
+        //playerOneWonCards.push(wonCardOne);
+        playerOneWonCards.push($handTwo[0]);
+        $handTwo.shift();
+        //playerOneWonCards = ($handTwo[0]);
+        //use detach to remove from hand array?
+        //playerOneWonCards.push(wonCardTwo);
+        //console.log(playerOneWonCards);
+        //console.log($handOne);
+        //console.log($handTwo);
+
       //if player one card is less than player two card
-      } else if ($handOne[0][0].value < $handTwo[0][0].value) {
-        playerTwoWonCards.push($handOne[0][0]);
-        playerTwoWonCards.push($handTwo[0][0]);
-        console.log(playerTwoWonCards);
+      } else if ($handOne[0].value < $handTwo[0].value) {
+
+        playerTwoWonCards.push($handOne[0]);
+        $handOne.shift();
+        playerTwoWonCards.push($handTwo[0]);
+        $handOne.shift();
+        //console.log(playerTwoWonCards);
       //if there is a tie make pick more cards
-      } else if ($handOne[0][0].value == $handTwo[0][0].value) {
+      } else if ($handOne[0].value == $handTwo[0].value) {
         //alert redraw
         //do onclick show again but show [0][1]
         //compare those
         //do the push
       }
         //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
+
+        //when hands are empty pull the won piles back to the hands
     };
 
 //turns
@@ -144,7 +170,7 @@ var deck = $("#first-deck");
       //console.log("hi");
       //on click show card
       var playerOneHand = $("#player-one");
-      var $cardOneImg = $("<img>").attr("src", $handOne[0][0].src);
+      var $cardOneImg = $("<img>").attr("src", $handOne[0].src);
       //console.log($cardOneImg);
       //console.log($handOne[0][0]);
       $cardOneImg.appendTo(playerOneHand);
@@ -162,7 +188,7 @@ var deck = $("#first-deck");
       //console.log("hi");
       //on click show card
       var playerTwoHand = $("#player-two");
-      var $cardTwoImg = $("<img>").attr("src", $handTwo[0][0].src);
+      var $cardTwoImg = $("<img>").attr("src", $handTwo[0].src);
       //console.log($cardTwoImg);
       //console.log($handTwo[0][0]);
       $cardTwoImg.appendTo(playerTwoHand);
