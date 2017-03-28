@@ -69,7 +69,7 @@ var starterDeck = [{name: "A", suit: "hearts", value: 1, src: "images/ace_of_hea
 var $handOne = [];
 var $handTwo = [];
 
-
+var playerOne = $("#player-one");
 
 $(function() {
 
@@ -92,8 +92,9 @@ var deck = $("#first-deck");
       //hides the initial deck div
       deck.hide();
       //creates the two hands
-      var $playerOneHand = $("<div />").attr("id", "player-one").appendTo("#board");
-      var $playerTwoHand = $("<div />").attr("id", "player-two").appendTo("#board");
+      var $playerOneHand = $("<div />").attr("id", "player-one").on("click", onClickShowCardOne).appendTo("#board");
+      var $playerTwoHand = $("<div />").attr("id", "player-two")
+      /*.on("click", onClickShowCardTwo)*/.appendTo("#board");
       //math random to shuffle deck
       var cards = [];
       for (var i = 0; i < starterDeck.length; i++) {
@@ -112,40 +113,47 @@ var deck = $("#first-deck");
         //console.log($handTwo);
     };
 //starts the game
-    deck.on("click", onClickSplitDeck);
+
 
 //turns
     var onClickShowCardOne = function() {
+      //console.log("hi");
       //on click show card
       var playerOneHand = $("#player-one");
-      for (var i = 0; i < $handOne.length; i++) {
-        $handOne[i].src.appendTo(playerOneHand);
+      //for (var i = 0; i < $handOne.length; i++) {
+        var $cardOneImg = $("<img>").attr("src", $handOne[0][0].src);
+        //console.log($cardOneImg);
+        //console.log($handOne[0][0]);
+        $cardOneImg.appendTo(playerOneHand);
+        //$handOne[0].appendTo(playerOneHand);
+        $cardOneImg.appendTo(playerOneHand);
+        //$handOne[i].src.show();
 
-      }
+      //}
         //compare cards
           //if players card is more than other players card
           //if tie make pick more cards
             //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
     };
 
-  $("#player-one").on("click", onClickShowCardOne)
+
 
     // go to other player and repeat above
 
-    var onClickShowCardTwo = function() {
-      //on click show card
-      var playerTwoHand = $("#player-two");
-      for (var i = 0; i < $handTwo.length; i++) {
-        $handTwo[i].src.appendTo(playerTwoHand);
+    // var onClickShowCardTwo = function() {
+    //   //on click show card
+    //   var playerTwoHand = $("#player-two");
+    //   for (var i = 0; i < $handTwo.length; i++) {
+    //     $handTwo[i].src.appendTo(playerTwoHand);
+    //
+    //   }
+    //     //compare cards
+    //       //if players card is more than other players card
+    //       //if tie make pick more cards
+    //         //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
+    // };
 
-      }
-        //compare cards
-          //if players card is more than other players card
-          //if tie make pick more cards
-            //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
-    };
-
-  $("#player-two").on("click", onClickShowCardTwo)
+  //playerOne.on("click", onClickShowCardTwo)
 
 //check win for rounds
 
@@ -163,6 +171,8 @@ var deck = $("#first-deck");
 //two new decks on click run turns
 
 //restart run restart
+deck.on("click", onClickSplitDeck);
+playerOne.on("click", onClickShowCardOne);
 
 
 });
