@@ -70,6 +70,7 @@ var $handOne = [];
 var $handTwo = [];
 
 var playerOne = $("#player-one");
+var playerTwo = $("#player-two");
 
 $(function() {
 
@@ -93,8 +94,7 @@ var deck = $("#first-deck");
       deck.hide();
       //creates the two hands
       var $playerOneHand = $("<div />").attr("id", "player-one").on("click", onClickShowCardOne).appendTo("#board");
-      var $playerTwoHand = $("<div />").attr("id", "player-two")
-      /*.on("click", onClickShowCardTwo)*/.appendTo("#board");
+      var $playerTwoHand = $("<div />").attr("id", "player-two").on("click", onClickShowCardTwo).appendTo("#board");
       //math random to shuffle deck
       var cards = [];
       for (var i = 0; i < starterDeck.length; i++) {
@@ -115,19 +115,60 @@ var deck = $("#first-deck");
 //starts the game
 
 
+    var compareCards = function() {
+      var playerOneWonCards = [];
+      var playerTwoWonCards = [];
+      //compare cards
+      //if playerone card is more than playertwo card
+      if ($handOne[0][0].value > $handTwo[0][0].value) {
+          playerOneWonCards.push($handOne[0][0]); //need to hide card after it's been pushed....
+          playerOneWonCards.push($handTwo[0][0]); //use detach to remove from hand array?
+          console.log(playerOneWonCards);
+      //if player one card is less than player two card
+      } else if ($handOne[0][0].value < $handTwo[0][0].value) {
+        playerTwoWonCards.push($handOne[0][0]);
+        playerTwoWonCards.push($handTwo[0][0]);
+        console.log(playerTwoWonCards);
+      //if there is a tie make pick more cards
+      } else if ($handOne[0][0].value == $handTwo[0][0].value) {
+        //alert redraw
+        //do onclick show again but show [0][1]
+        //compare those
+        //do the push
+      }
+        //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
+    };
+
 //turns
     var onClickShowCardOne = function() {
       //console.log("hi");
       //on click show card
       var playerOneHand = $("#player-one");
-      //for (var i = 0; i < $handOne.length; i++) {
-        var $cardOneImg = $("<img>").attr("src", $handOne[0][0].src);
-        //console.log($cardOneImg);
-        //console.log($handOne[0][0]);
-        $cardOneImg.appendTo(playerOneHand);
-        //$handOne[0].appendTo(playerOneHand);
-        $cardOneImg.appendTo(playerOneHand);
-        //$handOne[i].src.show();
+      var $cardOneImg = $("<img>").attr("src", $handOne[0][0].src);
+      //console.log($cardOneImg);
+      //console.log($handOne[0][0]);
+      $cardOneImg.appendTo(playerOneHand);
+      $cardOneImg.appendTo(playerOneHand);
+      //var wonCardsPlayerOne = [];
+      //}
+
+    };
+
+
+
+    // go to other player and repeat above
+
+    var onClickShowCardTwo = function() {
+      //console.log("hi");
+      //on click show card
+      var playerTwoHand = $("#player-two");
+      var $cardTwoImg = $("<img>").attr("src", $handTwo[0][0].src);
+      //console.log($cardTwoImg);
+      //console.log($handTwo[0][0]);
+      $cardTwoImg.appendTo(playerTwoHand);
+      $cardTwoImg.appendTo(playerTwoHand);
+
+      compareCards();
 
       //}
         //compare cards
@@ -136,24 +177,6 @@ var deck = $("#first-deck");
             //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
     };
 
-
-
-    // go to other player and repeat above
-
-    // var onClickShowCardTwo = function() {
-    //   //on click show card
-    //   var playerTwoHand = $("#player-two");
-    //   for (var i = 0; i < $handTwo.length; i++) {
-    //     $handTwo[i].src.appendTo(playerTwoHand);
-    //
-    //   }
-    //     //compare cards
-    //       //if players card is more than other players card
-    //       //if tie make pick more cards
-    //         //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
-    // };
-
-  //playerOne.on("click", onClickShowCardTwo)
 
 //check win for rounds
 
@@ -173,6 +196,8 @@ var deck = $("#first-deck");
 //restart run restart
 deck.on("click", onClickSplitDeck);
 playerOne.on("click", onClickShowCardOne);
+playerTwo.on("click", onClickShowCardTwo);
+
 
 
 });

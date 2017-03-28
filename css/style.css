@@ -24,7 +24,7 @@ h3 {
 
 #first-deck {
   display: flex;
-  width: 300px;
+  width: 225px;
   height: 450px;
   background-color: #A99285;
   position: center;
@@ -34,7 +34,7 @@ h3 {
 
 #player-one {
   display: flex;
-  width: 300px;
+  width: 225px;
   height: 450px;
   background-color: #A99285;
   position: center;
@@ -44,7 +44,7 @@ h3 {
 
 #player-two {
   display: flex;
-  width: 300px;
+  width: 225px;
   height: 450px;
   background-color: #A99285;
   position: center;
