@@ -68,9 +68,13 @@ var starterDeck = [{name: "A", suit: "hearts", value: 1, src: "images/ace_of_hea
 
 var $handOne = [];
 var $handTwo = [];
+var board = $("#board");
 
 var playerOne = $("#player-one");
 var playerTwo = $("#player-two");
+
+var playerOneWonCards = [];
+var playerTwoWonCards = [];
 
 $(function() {
 
@@ -95,6 +99,15 @@ var deck = $("#first-deck");
       //creates the two hands
       var $playerOneHand = $("<div />").attr("id", "player-one").on("click", onClickShowCardOne).appendTo("#board");
       var $playerTwoHand = $("<div />").attr("id", "player-two").on("click", onClickShowCardTwo).appendTo("#board");
+
+      var $cardOneImg = $("<img>").attr("id", "handOneImg");
+      //console.log($cardOneImg);
+      $cardOneImg.appendTo($playerOneHand);
+
+      var $cardTwoImg = $("<img>").attr("id", "handTwoImg");
+      //console.log($cardTwoImg);
+      $cardTwoImg.appendTo($playerTwoHand);
+
       //math random to shuffle deck
       var cards = [];
       for (var i = 0; i < starterDeck.length; i++) {
@@ -121,45 +134,79 @@ var deck = $("#first-deck");
 
 
     var compareCards = function() {
-      var playerOneWonCards = [];
-      var playerTwoWonCards = [];
 
       //compare cards
+            //pushes put cards into discard piles
+            //shifts remove the first card object from the hand arrays
+
       //if playerone card is more than playertwo card
       if ($handOne[0].value > $handTwo[0].value) {
-        //var wonCardOne = $handOne.splice([0][0]);
-        //console.log(wonCardOne);
-        //var wonCardTwo = $handTwo.splice([0][0]);
-        //console.log(wonCardTwo);
         playerOneWonCards.push($handOne[0]);
-        //playerOneWonCards = $handOne.splice(0, 1) + $handTwo.splice(0, 1);
-        //need to hide card after it's been pushed....
         $handOne.shift();
-        //playerOneWonCards.push(wonCardOne);
         playerOneWonCards.push($handTwo[0]);
         $handTwo.shift();
-        //playerOneWonCards = ($handTwo[0]);
-        //use detach to remove from hand array?
-        //playerOneWonCards.push(wonCardTwo);
-        //console.log(playerOneWonCards);
+        console.log(playerOneWonCards);
         //console.log($handOne);
         //console.log($handTwo);
 
       //if player one card is less than player two card
       } else if ($handOne[0].value < $handTwo[0].value) {
-
         playerTwoWonCards.push($handOne[0]);
         $handOne.shift();
         playerTwoWonCards.push($handTwo[0]);
-        $handOne.shift();
-        //console.log(playerTwoWonCards);
+        $handTwo.shift();
+        console.log(playerTwoWonCards);
+        //console.log($handOne);
+        //console.log($handTwo);
+
       //if there is a tie make pick more cards
       } else if ($handOne[0].value == $handTwo[0].value) {
         //alert redraw
+        alert("Oh no! Your cards are the same value! Redraw, winner take all!")
         //do onclick show again but show [0][1]
+        board.on("click", function() {
+          var handOneImg = $("#handOneImg");
+          handOneImg.attr("src", $handOne[1].src);
+          var handTwoImg = $("#handTwoImg");
+          handTwoImg.attr("src", $handTwo[1].src);
+          //compare the two newly drawn cards
+          if ($handOne[1] > $handTwo[1]) {
+            playerOneWonCards.push($handOne[0]);
+            $handOne.shift();
+            playerOneWonCards.push($handOne[0])
+            $handOne.shift();
+            playerOneWonCards.push($handTwo[0]);
+            $handTwo.shift();
+            playerOneWonCards.push($handTwo[0]);
+            $handTwo.shift();
+            console.log(playerOneWonCards);
+            console.log($handOne);
+            console.log($handTwo);
+
+          } else if ($handOne[1] < $handTwo[1]) {
+            playerTwoWonCards.push($handOne[0]);
+            $handOne.shift();
+            playerTwoWonCards.push($handOne[0]);
+            $handOne.shift();
+            playerTwoWonCards.push($handTwo[0]);
+            $handTwo.shift();
+            playerTwoWonCards.push($handTwo[0]);
+            $handTwo.shift();
+            console.log(playerTwoWonCards);
+            console.log($handOne);
+            console.log($handTwo);
+
+
+          } else if ($handOne[1] == $handTwo[1]) {
+
+          }
+
+        })
         //compare those
         //do the push
-      }
+      };
+
+
         //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
 
         //when hands are empty pull the won piles back to the hands
@@ -169,14 +216,13 @@ var deck = $("#first-deck");
     var onClickShowCardOne = function() {
       //console.log("hi");
       //on click show card
-      var playerOneHand = $("#player-one");
-      var $cardOneImg = $("<img>").attr("src", $handOne[0].src);
-      //console.log($cardOneImg);
-      //console.log($handOne[0][0]);
-      $cardOneImg.appendTo(playerOneHand);
-      $cardOneImg.appendTo(playerOneHand);
-      //var wonCardsPlayerOne = [];
-      //}
+      // var playerOneHand = $("#player-one");
+      // var $cardOneImg = $("<img>").attr("src", $handOne[0].src);
+      // //console.log($cardOneImg);
+      // $cardOneImg.appendTo(playerOneHand);
+      var handOneImg = $("#handOneImg");
+      handOneImg.attr("src", $handOne[0].src);
+
 
     };
 
@@ -187,12 +233,13 @@ var deck = $("#first-deck");
     var onClickShowCardTwo = function() {
       //console.log("hi");
       //on click show card
-      var playerTwoHand = $("#player-two");
-      var $cardTwoImg = $("<img>").attr("src", $handTwo[0].src);
-      //console.log($cardTwoImg);
-      //console.log($handTwo[0][0]);
-      $cardTwoImg.appendTo(playerTwoHand);
-      $cardTwoImg.appendTo(playerTwoHand);
+      // var playerTwoHand = $("#player-two");
+      // var $cardTwoImg = $("<img>").attr("src", $handTwo[0].src);
+      // //console.log($cardTwoImg);
+      // $cardTwoImg.appendTo(playerTwoHand);
+
+      var handTwoImg = $("#handTwoImg");
+      handTwoImg.attr("src", $handTwo[0].src);
 
       compareCards();
 
