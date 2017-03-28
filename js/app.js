@@ -76,6 +76,11 @@ var playerTwo = $("#player-two");
 var playerOneWonCards = [];
 var playerTwoWonCards = [];
 
+var turnPhrase = $("#turn");
+var status = $("#status");
+
+
+
 $(function() {
 
 //grab elements
@@ -108,27 +113,22 @@ var deck = $("#first-deck");
       //console.log($cardTwoImg);
       $cardTwoImg.appendTo($playerTwoHand);
 
-      //math random to shuffle deck
+      //math random to shuffle deck ERROR THIS IS NOT EXCLUDING CARDS ALREADY PICKED
+      //USE FISHER_YATES SHUFFLE or DURSTENFELD SHUFFLE
       var cards = [];
       for (var i = 0; i < starterDeck.length; i++) {
         cards.push(starterDeck[Math.floor(Math.random()*starterDeck.length)]);
         //console.log(cards);
-        };
-        //THE COMMENTED OUT STUFF IN THIS FUNCTION WAS BECAUSE WE WERE GETTING OBJECTS IN AND ARRAY INSIDE ANOTHER ARRAY
-
+      };
         //takes the first half of the cards array and puts it into the first hand
-        //var handOne = cards.splice(0, 26);
-        //$handOne.push(handOne);
         $handOne = cards.splice(0, 26);
-        //$handOne.push(cards.splice(0, 26));
         //console.log($handOne);
 
         //takes the last remaining parts of the cards array and put them into the second hand
-        //var handTwo = cards.splice(0, 26);
-        //$handTwo.push(handTwo);
+
         $handTwo = cards.splice(0, 26);
-        //$handTwo.push(cards.splice(0, 26));
         //console.log($handTwo);
+        turnPhrase.text("Player 1 Go!");
     };
 //starts the game
 
@@ -138,6 +138,37 @@ var deck = $("#first-deck");
       //compare cards
             //pushes put cards into discard piles
             //shifts remove the first card object from the hand arrays
+
+      //while ($handOne.length !== 0 && $handTwo.length !== 0) {
+      //   for (var i = 0; i < $handOne.length; i++) {
+      //     for (var j = 0; j < $handTwo.length; j++) {
+      //       //if cards match keep going
+      //       if ($handTwo[j].value === $handOne[i].value) {
+      //       //if hand two card value is less than hand one card value put cards into array and remove from hand
+      //       } else if ($handTwo[j].value < $handOne[i].value) {
+      //         playerOneWonCards.push($handOne[0]);
+      //         $handOne.shift();
+      //         playerOneWonCards.push($handTwo[0]);
+      //         $handTwo.shift();
+      //         console.log(playerOneWonCards);
+      //         //console.log($handOne);
+      //         //console.log($handTwo);
+      //         break
+      //       //if hand two card value is greater than hand one card value put cards into array and remove from hand
+      //     } else if ($handTwo[j].value > $handOne[i].value) {
+      //         playerTwoWonCards.push($handOne[0]);
+      //         $handOne.shift();
+      //         playerTwoWonCards.push($handTwo[0]);
+      //         $handTwo.shift();
+      //         console.log(playerTwoWonCards);
+      //         //console.log($handOne);
+      //         //console.log($handTwo);
+      //         break
+      //       }
+      //     }
+      //   }
+      // //}
+
 
       //if playerone card is more than playertwo card
       if ($handOne[0].value > $handTwo[0].value) {
@@ -162,46 +193,42 @@ var deck = $("#first-deck");
       //if there is a tie make pick more cards
       } else if ($handOne[0].value == $handTwo[0].value) {
         //alert redraw
-        alert("Oh no! Your cards are the same value! Redraw, winner take all!")
-        //do onclick show again but show [0][1]
-        board.on("click", function() {
-          var handOneImg = $("#handOneImg");
-          handOneImg.attr("src", $handOne[1].src);
-          var handTwoImg = $("#handTwoImg");
-          handTwoImg.attr("src", $handTwo[1].src);
-          //compare the two newly drawn cards
-          if ($handOne[1] > $handTwo[1]) {
-            playerOneWonCards.push($handOne[0]);
-            $handOne.shift();
-            playerOneWonCards.push($handOne[0])
-            $handOne.shift();
-            playerOneWonCards.push($handTwo[0]);
-            $handTwo.shift();
-            playerOneWonCards.push($handTwo[0]);
-            $handTwo.shift();
-            console.log(playerOneWonCards);
-            console.log($handOne);
-            console.log($handTwo);
-
-          } else if ($handOne[1] < $handTwo[1]) {
-            playerTwoWonCards.push($handOne[0]);
-            $handOne.shift();
-            playerTwoWonCards.push($handOne[0]);
-            $handOne.shift();
-            playerTwoWonCards.push($handTwo[0]);
-            $handTwo.shift();
-            playerTwoWonCards.push($handTwo[0]);
-            $handTwo.shift();
-            console.log(playerTwoWonCards);
-            console.log($handOne);
-            console.log($handTwo);
-
-
-          } else if ($handOne[1] == $handTwo[1]) {
-
+        //status.text("It's a Tie! WAR!");
+          for (var i = 0; i < $handOne.length; i++) {
+            for (var j = 0; j < $handTwo.length; j++) {
+              //if cards match keep going
+              if ($handTwo[j].value === $handOne[i].value) {
+              //if hand two card value is less than hand one card value put cards into array and remove from hand
+              } else if ($handTwo[j].value < $handOne[i].value) {
+                playerOneWonCards.push($handOne[i]);
+                $handOne.shift();
+                playerOneWonCards.push($handTwo[j]);
+                $handTwo.shift();
+                console.log(playerOneWonCards);
+                //console.log($handOne);
+                //console.log($handTwo);
+                break
+              //if hand two card value is greater than hand one card value put cards into array and remove from hand
+            } else if ($handTwo[j].value > $handOne[i].value) {
+                playerTwoWonCards.push($handOne[i]);
+                $handOne.shift();
+                playerTwoWonCards.push($handTwo[j]);
+                $handTwo.shift();
+                console.log(playerTwoWonCards);
+                //console.log($handOne);
+                //console.log($handTwo);
+                break
+              }
+            }
           }
+        // //}
+        //var $playerOneTiePull = $("<div />").attr("id", "playerOneTie").appendTo(board);
+        //var $playerTwoTiePull = $("<div />").attr("id", "playerTwoTie").appendTo(board);
+        //var $playerOneTieImg = $("<img>")
+        //var $playerTwoTieImg = $("<img>")
 
-        })
+
+
         //compare those
         //do the push
       };
@@ -222,6 +249,15 @@ var deck = $("#first-deck");
       // $cardOneImg.appendTo(playerOneHand);
       var handOneImg = $("#handOneImg");
       handOneImg.attr("src", $handOne[0].src);
+      turnPhrase.text("Player 2 Draw!")
+
+      // if ($handOne.length === 0) {
+      //   for (var i = 0; i < playerOneWonCards.length; i++) {
+      //     $handOne.push(playerOneWonCards);
+      //     playerOneWonCards = [];
+      //   }
+      //
+      // }
 
 
     };
@@ -240,8 +276,16 @@ var deck = $("#first-deck");
 
       var handTwoImg = $("#handTwoImg");
       handTwoImg.attr("src", $handTwo[0].src);
+      turnPhrase.text("Player 1 Draw!");
+
+      // if ($handTwo.length === 0) {
+      //   $handTwo.push(playerTwoWonCards);
+      //   playerTwoWonCards = [];
+      // }
 
       compareCards();
+
+
 
       //}
         //compare cards
