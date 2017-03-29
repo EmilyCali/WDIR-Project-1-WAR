@@ -109,7 +109,7 @@ $(function() {
 // handlers
 
     var fisherYatesShuffle = function(array) {
-      var n = starterDeck.length
+      var n = array.length
       var t;
       var i;
 
@@ -275,9 +275,9 @@ $(function() {
 //reshuffle
 //allows players to shuffle thier hands
     var reshuffle = function() {
-      fisherYatesShuffle($handOne);
+      $handOne = fisherYatesShuffle($handOne);
       console.log($handOne);
-      fisherYatesShuffle($handTwo);
+      $handTwo = fisherYatesShuffle($handTwo);
       console.log($handTwo);
     }; //removed button from html, currently this doesn't do anything
 
@@ -288,72 +288,8 @@ deck.on("click", onClickSplitDeck);
 playerOne.on("click", onClickShowCardOne);
 playerTwo.on("click", onClickShowCardTwo);
 
-//$reshuffle.on("click", reshuffle);
+$reshuffle.on("click", reshuffle);
 
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//AN Idea from THE POKEMON GAME
-// var player1 = {
-//   wins: 0,
-//   roundsWon: 0,
-//   // updateStats: function() {
-//   //   console.log("Player One has " + this.roundsWon "rounds won and " + this.wins + " wins."),
-//   // },
-//   firstHand: function() {
-//     for (var i = 0; i < starterDeck.length/2; i++) {
-//       var card = starterDeck[Math.floor(Math.random()*starterDeck.length)];
-//       $handOne.push(card);
-//     }
-//   },
-//   wonCards: [],
-//
-// };
-//
-// player1.firstHand();
-// console.log($handOne);
