@@ -182,6 +182,7 @@ var fisherYatesShuffle = function(array) {
       } else if ($handOne[0].value == $handTwo[0].value) {
         //alert redraw
         //status.text("It's a Tie! WAR!");
+        //puts tied cards into own array to be called later and given to round winner, temporary fix
         tieCards.push($handOne[0])
         $handOne.shift();
         tieCards.push($handTwo[0]);
@@ -237,14 +238,10 @@ var fisherYatesShuffle = function(array) {
       var handOneImg = $("#handOneImg");
       handOneImg.attr("src", $handOne[0].src);
       turnPhrase.text("Player 2 Draw!")
-
-      // if ($handOne.length === 0) {
-      //   for (var i = 0; i < playerOneWonCards.length; i++) {
-      //     $handOne.push(playerOneWonCards);
-      //     playerOneWonCards = [];
-      //   }
-      //
-      // }
+      if ($handOne.length === 0) {
+        roundWinner();
+        //$handOne = playerOneWonCards;
+      }
     };
 
 
@@ -255,18 +252,12 @@ var fisherYatesShuffle = function(array) {
       var handTwoImg = $("#handTwoImg");
       handTwoImg.attr("src", $handTwo[0].src);
       turnPhrase.text("Player 1 Draw!");
-
-      // if ($handTwo.length === 0) {
-      //   $handTwo.push(playerTwoWonCards);
-      //   playerTwoWonCards = [];
-      // }
-
       compareCards();
-      //}
-        //compare cards
-          //if players card is more than other players card
-          //if tie make pick more cards
-            //move compared cards to new arrays (higher value goes to the discard of the person with the winning card)
+      if ($handTwo.length === 0) {
+        roundWinner();
+        //$handTwo = playerTwoWonCards;
+      //   playerTwoWonCards = [];
+      }
     };
 
 
@@ -274,22 +265,55 @@ var fisherYatesShuffle = function(array) {
     var roundWinner = function() {
       //if ($handOne.length === 0 && $handTwo.length === 0) {
         if (playerOneWonCards.length > playerTwoWonCards.length) {
-          status.text("Player 1 Wins the Round!");
+          //status.html("Player 1 Wins the Round!");
+          console.log("player one won the round");
           $handOne.push(tieCards);
-          tieCards.shift();
+          tieCards.splice();
+          //console.log(tieCards);
+          // $handOne = playerOneWonCards;//.splice();
+          // playerOneWonCards.splice();
+          // //console.log($handOne);
+          // $handTwo = playerTwoWonCards;//.splice();
+          // playerTwoWonCards.splice();
+          // //console.log($handTwo);
         } else if (playerOneWonCards.length < playerTwoWonCards.length) {
-          status.text("Player Two Wins the Round!");
+          //status.html("Player Two Wins the Round!");
+          console.log("player two won the round");
           $handTwo.push(tieCards);
-          tieCards.shift();
+          tieCards.splice();
+          //console.log(tieCards);
+          // $handOne = playerOneWonCards;//.splice();
+          // playerOneWonCards.splice();
+          // //console.log($handOne);
+          // $handTwo = playerTwoWonCards;//.splice();
+          // playerTwoWonCards.splice();
+          // //console.log($handTwo);
         } else if (playerOneWonCards.length == playerTwoWonCards.length) {
-          status.text("Tied Round! Keep Playing!");
-
-        }
-      //}
-    }
+          //status.html("Tied Round! Keep Playing!");
+          console.log("there was a tie for the round");
+          // $handOne = playerOneWonCards;//.splice();
+          // playerOneWonCards.splice();
+          // //console.log($handOne);
+          // $handTwo = playerTwoWonCards;//.splice();
+          // playerTwoWonCards.splice();
+          // //console.log($handTwo);
+        };
+        $handOne = playerOneWonCards;//.splice();
+        playerOneWonCards.splice();
+        //console.log($handOne);
+        $handTwo = playerTwoWonCards;//.splice();
+        playerTwoWonCards.splice();
+        //console.log($handTwo);
+    };
 
 //check win for game
-
+    var gameWin = function() {
+      if (playerOneWonCards.length === 52) {
+        console.log("player one won the game!")
+      } else if (playerTwoWonCards.length === 52) {
+        console.log("player two won the game!")
+      }
+    }
 //restart game
 
 // keep score
