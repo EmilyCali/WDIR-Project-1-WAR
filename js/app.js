@@ -245,13 +245,16 @@ $(function() {
         };
         $handOne = playerOneWonCards;
         playerOneWonCards = [];
-        //console.log($handOne);
+        console.log($handOne);
         //console.log(playerOneWonCards);
 
         $handTwo = playerTwoWonCards;
         playerTwoWonCards = [];
-        //console.log($handTwo);
+        console.log($handTwo);
         //console.log(playerTwoWonCards);
+        console.log($handOne.length);
+        console.log($handTwo.length);
+        console.log(tieCards.length);
 
         gameWin();
     };
