@@ -93,7 +93,7 @@ var playerTwo = $("#player-two");
 
 //grab buttons
 var $reshuffle = $("#reshuffle");
-var restart = $("#restart");
+var $restart = $("#restart");
 
 //grab the paragraph areas that will be changed to prompt turns and tell status
 var turnPhrase = $("#turn");
@@ -146,10 +146,10 @@ $(function() {
       cards = starterDeck;
         //takes the first half of the cards array and puts it into the first hand
       $handOne = cards.splice(0, 26);
-      console.log($handOne);
+      //console.log($handOne);
       //takes the last remaining parts of the cards array and put them into the second hand
       $handTwo = cards.splice(0, 26);
-      console.log($handTwo);
+      //console.log($handTwo);
       turnPhrase.text("Player 1 Go!").css("font-size", "20px");
     };
 //starts the game
@@ -208,7 +208,6 @@ $(function() {
       turnPhrase.text("Player 2 Draw!")
       if ($handOne.length === 0) {
         roundWinner();
-
       }
     };
 
@@ -221,7 +220,6 @@ $(function() {
       compareCards();
       if ($handTwo.length === 0) {
         roundWinner();
-
       }
     };
 
@@ -271,15 +269,18 @@ $(function() {
 
 
 //restart game
+    var restart = function() {
+      location.reload();
+    };
 
 //reshuffle
 //allows players to shuffle thier hands
     var reshuffle = function() {
       $handOne = fisherYatesShuffle($handOne);
-      console.log($handOne);
+      //console.log($handOne);
       $handTwo = fisherYatesShuffle($handTwo);
-      console.log($handTwo);
-    }; //removed button from html, currently this doesn't do anything
+      //console.log($handTwo);
+    };
 
 
 //listeners
@@ -289,7 +290,7 @@ playerOne.on("click", onClickShowCardOne);
 playerTwo.on("click", onClickShowCardTwo);
 
 $reshuffle.on("click", reshuffle);
-
+$restart.on("click", restart);
 
 
 });
