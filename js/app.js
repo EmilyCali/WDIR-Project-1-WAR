@@ -162,8 +162,17 @@ var fisherYatesShuffle = function(array) {
         $handOne.shift();
         playerOneWonCards.push($handTwo[0]);
         $handTwo.shift();
+
+        //gets the tie cards since tie cards are being taken out of play and need to go to the next draw winner
+        if (tieCards.length > 0) {
+          playerOneWonCards.push(tieCards[0]);
+          tieCards.shift();
+          playerOneWonCards.push(tieCards[0]);
+          tieCards.shift();
+        };
         console.log(playerOneWonCards);
         console.log(playerTwoWonCards);
+        console.log(tieCards);
         //console.log($handOne);
         //console.log($handTwo);
 
@@ -173,8 +182,16 @@ var fisherYatesShuffle = function(array) {
         $handOne.shift();
         playerTwoWonCards.push($handTwo[0]);
         $handTwo.shift();
+
+        if (tieCards.length > 0) {
+          playerTwoWonCards.push(tieCards[0]);
+          tieCards.shift();
+          playerTwoWonCards.push(tieCards[0]);
+          tieCards.shift();
+        };
         console.log(playerOneWonCards);
         console.log(playerTwoWonCards);
+        console.log(tieCards);
         //console.log($handOne);
         //console.log($handTwo);
 
@@ -187,6 +204,7 @@ var fisherYatesShuffle = function(array) {
         $handOne.shift();
         tieCards.push($handTwo[0]);
         $handTwo.shift();
+        console.log(tieCards);
         //console.log(tieCards);
           // for (var i = 0; i < $handOne.length; i++) {
           //   for (var j = 0; j < $handTwo.length; j++) {
@@ -244,8 +262,6 @@ var fisherYatesShuffle = function(array) {
       }
     };
 
-
-
     // go to other player and repeat above
 
     var onClickShowCardTwo = function() {
@@ -259,7 +275,6 @@ var fisherYatesShuffle = function(array) {
       //   playerTwoWonCards = [];
       }
     };
-
 
 //check win for rounds
     var roundWinner = function() {
@@ -313,7 +328,7 @@ var fisherYatesShuffle = function(array) {
       } else if (playerTwoWonCards.length === 52) {
         console.log("player two won the game!")
       }
-    }
+    };
 //restart game
 
 // keep score
