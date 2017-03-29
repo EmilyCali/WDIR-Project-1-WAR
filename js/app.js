@@ -89,7 +89,7 @@ var playerTwo = $("#player-two");
 
 //grab the paragraph areas that will be changed to prompt turns and tell status
 var turnPhrase = $("#turn");
-var status = $("#status");
+var $status = $("#status");
 
 //start jquery
 $(function() {
@@ -121,10 +121,19 @@ var fisherYatesShuffle = function(array) {
       var $playerOneHand = $("<div />").attr("id", "player-one").on("click", onClickShowCardOne).appendTo("#board");
       //player 2 hand (new div)
       var $playerTwoHand = $("<div />").attr("id", "player-two").on("click", onClickShowCardTwo).appendTo("#board");
-      //creates new images inside hand divs
+  //create score areas
+      // var $scoreboard = $("<div />").attr("id", "scoreboard").appendTo("#status");
+      // var $playerOneDiv = $("<div />").appendTo(scoreboard);
+      // var $playerTwoDiv
+      // var $playerOneScore = $("<p> Player One Score: </p>").attr("id", "playerOneScore").appendTo(scoreboard);
+      // var $playerTwoScore = $("<p> Player Two Score: </p>").attr("id", "playerTwoScore").appendTo(scoreboard);
+
+
+  //creates new images inside hand divs
       var $cardOneImg = $("<img>").attr("id", "handOneImg");
       //console.log($cardOneImg);
       $cardOneImg.appendTo($playerOneHand);
+
       var $cardTwoImg = $("<img>").attr("id", "handTwoImg");
       //console.log($cardTwoImg);
       $cardTwoImg.appendTo($playerTwoHand);
@@ -162,7 +171,7 @@ var fisherYatesShuffle = function(array) {
         $handOne.shift();
         playerOneWonCards.push($handTwo[0]);
         $handTwo.shift();
-
+        $status.text("Player One Won the Hand!");
         //gets the tie cards since tie cards are being taken out of play and need to go to the next draw winner
         if (tieCards.length > 0) {
           playerOneWonCards.push(tieCards[0]);
@@ -170,9 +179,10 @@ var fisherYatesShuffle = function(array) {
           playerOneWonCards.push(tieCards[0]);
           tieCards.shift();
         };
-        console.log(playerOneWonCards);
-        console.log(playerTwoWonCards);
-        console.log(tieCards);
+
+        //console.log(playerOneWonCards);
+        //console.log(playerTwoWonCards);
+        //console.log(tieCards);
         //console.log($handOne);
         //console.log($handTwo);
 
@@ -182,6 +192,7 @@ var fisherYatesShuffle = function(array) {
         $handOne.shift();
         playerTwoWonCards.push($handTwo[0]);
         $handTwo.shift();
+        $status.text("Player Two Won the Hand!")
 
         if (tieCards.length > 0) {
           playerTwoWonCards.push(tieCards[0]);
@@ -189,9 +200,9 @@ var fisherYatesShuffle = function(array) {
           playerTwoWonCards.push(tieCards[0]);
           tieCards.shift();
         };
-        console.log(playerOneWonCards);
-        console.log(playerTwoWonCards);
-        console.log(tieCards);
+        //console.log(playerOneWonCards);
+        //console.log(playerTwoWonCards);
+        //console.log(tieCards);
         //console.log($handOne);
         //console.log($handTwo);
 
@@ -200,46 +211,12 @@ var fisherYatesShuffle = function(array) {
         //alert redraw
         //status.text("It's a Tie! WAR!");
         //puts tied cards into own array to be called later and given to round winner, temporary fix
+        $status.text("There's been a tie! WAR! Next hand wins these cards!")
         tieCards.push($handOne[0])
         $handOne.shift();
         tieCards.push($handTwo[0]);
         $handTwo.shift();
-        console.log(tieCards);
-        //console.log(tieCards);
-          // for (var i = 0; i < $handOne.length; i++) {
-          //   for (var j = 0; j < $handTwo.length; j++) {
-          //     //if cards match keep going
-          //     if ($handTwo[j].value === $handOne[i].value) {
-          //     //if hand two card value is less than hand one card value put cards into array and remove from hand
-          //     } else if ($handTwo[j].value < $handOne[i].value) {
-          //       playerOneWonCards.push($handOne[i]);
-          //       $handOne.shift();
-          //       playerOneWonCards.push($handTwo[j]);
-          //       $handTwo.shift();
-          //       console.log(playerOneWonCards);
-          //       console.log(playerTwoWonCards);
-          //       //console.log($handOne);
-          //       //console.log($handTwo);
-          //       break
-          //     //if hand two card value is greater than hand one card value put cards into array and remove from hand
-          //   } else if ($handTwo[j].value > $handOne[i].value) {
-          //       playerTwoWonCards.push($handOne[i]);
-          //       $handOne.shift();
-          //       playerTwoWonCards.push($handTwo[j]);
-          //       $handTwo.shift();
-          //       console.log(playerOneWonCards);
-          //       console.log(playerTwoWonCards);
-          //       //console.log($handOne);
-          //       //console.log($handTwo);
-          //       break
-          //     }
-          //   }
-          //}
-        // //}
-        //var $playerOneTiePull = $("<div />").attr("id", "playerOneTie").appendTo(board);
-        //var $playerTwoTiePull = $("<div />").attr("id", "playerTwoTie").appendTo(board);
-        //var $playerOneTieImg = $("<img>")
-        //var $playerTwoTieImg = $("<img>")
+
 
         //compare those
         //do the push

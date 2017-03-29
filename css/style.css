@@ -22,6 +22,22 @@ h3 {
   padding: 40px;
 }
 
+#status {
+  /*display: flex;
+  align-content: center;
+  position: center;
+  margin: auto;
+  padding: 20px;*/
+}
+
+#scoreboard {
+  display: flex;
+  align-content: center;
+  position: center;
+  margin: auto;
+  padding: 15px;
+}
+
 #first-deck {
   display: flex;
   width: 225px;
