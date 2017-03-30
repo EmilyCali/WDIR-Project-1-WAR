@@ -170,7 +170,11 @@ $(function() {
       //console.log("p1 before move" + playerOneWonCards.length);
       //gets the tie cards since tie cards are being taken out of play and need to go to the next draw winner
       if (tieCards.length > 0) {
-        playerOneWonCards.concat(tieCards);
+        //console.log("player one won cards length: " + playerOneWonCards.length);
+        for (var i = 0; i < tieCards.length; i++) {
+          playerOneWonCards.push(tieCards[i]);
+          //console.log("after getting the tie cards player one has this many cards: " + playerOneWonCards.length);
+        };
         tieCards = [];
       };
 
@@ -191,9 +195,12 @@ $(function() {
       //console.log("p2 before move" + playerTwoWonCards.length);
 
       if (tieCards.length > 0) {
-        playerTwoWonCards.concat(tieCards);
-        tieCards = [];
+        //console.log("player2 won cards length: " + playerTwoWonCards.length);
+        for (var i = 0; i < tieCards.length; i++)
+        playerTwoWonCards.push(tieCards[i]);
+        //console.log("after getting the tie cards player two has this many cards: " + playerTwoWonCards.length);
       };
+      tieCards = [];
 
       // if (tieCards.length === 2) {
       //   playerTwoWonCards.push(tieCards[0]);
@@ -209,6 +216,7 @@ $(function() {
       $handOne.shift();
       tieCards.push($handTwo[0]);
       $handTwo.shift();
+      //console.log("there are this many tiecards in the tie hand " + tieCards.length);
     }
   };
   //};
@@ -247,65 +255,44 @@ $(function() {
       $status.text("Player 1 Wins the Round!");
       $playerOneScore.text("Player One Score: " + pOneScore);
       $playerTwoScore.text("Player Two Score: " + pTwoScore);
-      //if ($handOne.length === 0){
-        //replenishHandOne();
-      //};
-      //if ($handTwo.length === 0){
-        //replenishHandTwo();
-      //};
 
     } else if ($handOne.length < $handTwo.length) {
       pTwoScore++
       $status.text("Player Two Wins the Round!");
       $playerOneScore.text("Player One Score: " + pOneScore);
       $playerTwoScore.text("Player Two Score: " + pTwoScore);
-      //console.log($handOne);
-      //console.log($handTwo);
-      //if ($handOne.length === 0){
-        //replenishHandOne();
-      //};
-      //if ($handTwo.length === 0){
-        //replenishHandTwo();
-      //};
 
     } else if ($handOne.length === $handTwo.length) {
       $status.text("Tied Round! Keep Playing!");
       $playerOneScore.text("Player One Score: " + pOneScore);
       $playerTwoScore.text("Player Two Score: " + pTwoScore);
-      //console.log($handOne);
-      //console.log($handTwo);
-      //if ($handOne.length === 0){
-        //replenishHandOne();
-      //};
-      //if ($handTwo.length === 0){
-        //replenishHandTwo();
-      //};
+
     };
-    console.log($handOne.length);
-    console.log($handTwo.length);
-    console.log(tieCards.length);
-    console.log(playerOneWonCards.length);
-    console.log(playerTwoWonCards.length);
+    //console.log($handOne.length);
+    //console.log($handTwo.length);
+    //console.log(tieCards.length);
+    //console.log(playerOneWonCards.length);
+    //console.log(playerTwoWonCards.length);
     gameWin();
   };
 
   //fills the empty handone with cards from the player one won cards and empties that won cards array
   var replenishHandOne = function() {
     //handone = player on won
-    $handOne = playerOneWonCards;
+    for (var i = 0; i < playerOneWonCards.length; i++) {
+      $handOne.push(playerOneWonCards[i]);
+    };
     playerOneWonCards = [];
-    //console.log($handOne);
-    //console.log(playerOneWonCards.length);
   };
 
 
   //fills the empty handtwo with cards from the player two won cards and empties that won cards array
   var replenishHandTwo = function() {
     // handtwo= playertwowoncards
-    $handTwo = playerTwoWonCards;
+    for (var i = 0; i < playerTwoWonCards.length; i++) {
+      $handTwo.push(playerTwoWonCards[i]);
+    };
     playerTwoWonCards = [];
-    //console.log($handTwo);
-    //console.log(playerTwoWonCards.length);
   };
 
   //check win for game
