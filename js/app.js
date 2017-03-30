@@ -89,8 +89,8 @@ pTwoScore = 0;
 //grab board
 var board = $("#board");
 //grab the divs that represent the hands
-var playerOne = $("#player-one");
-var playerTwo = $("#player-two");
+var $playerOne = $("#player-one");
+var $playerTwo = $("#player-two");
 
 //grab buttons
 var $reshuffle = $("#reshuffle");
@@ -216,6 +216,7 @@ $(function() {
       roundWinner();
     };
     var $handOneImg = $("#handOneImg");
+    //$playerOne.css("background-color", "ivory").css("background-image", "");
     //console.log($handOne);
     //console.log("=============")
     //console.log($handOne[0].value + "this is what is in the array for hand one");
@@ -230,6 +231,7 @@ $(function() {
       roundWinner();
     };
     var $handTwoImg = $("#handTwoImg");
+    //$playerTwo.css("background-color", "ivory").css("background-image", "");
     $handTwoImg.attr("src", $handTwo[0].src);
     turnPhrase.text("Player 1 Draw!");
     compareCards();
@@ -315,8 +317,8 @@ $(function() {
   //listeners
 
   deck.on("click", onClickSplitDeck);
-  playerOne.on("click", onClickShowCardOne);
-  playerTwo.on("click", onClickShowCardTwo);
+  $playerOne.on("click", onClickShowCardOne);
+  $playerTwo.on("click", onClickShowCardTwo);
 
   $reshuffle.on("click", reshuffle);
   $restart.on("click", restart);

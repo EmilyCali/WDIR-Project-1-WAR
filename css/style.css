@@ -1,5 +1,9 @@
 body {
-  background-color: #C0BABC;
+  background-color: #C0BABC; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(bottom,rgba(192,186,188,0),rgba(192,186,188,1)); /*Safari 5.1-6*/
+    background: -o-linear-gradient(bottom,rgba(192,186,188,0),rgba(192,186,188,1)); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(bottom,rgba(192,186,188,0),rgba(192,186,188,1)); /*Fx 3.6-15*/
+    background: linear-gradient(to bottom,rgba(192,186,188,0),rgba(192,186,188,1)); /*Standard*/
   text-align: center;
   margin: auto;
   padding: 20px;
@@ -9,10 +13,16 @@ body {
 
 h1 {
   color: black;
+  font-family: 'Fascinate Inline', cursive, sans-serif;
 }
 
 h2 {
-  color: black;
+  color: #745B5F;
+  font-family: 'Fascinate Inline', cursive, sans-serif;
+}
+
+p {
+  font-family: 'Prompt', sans-serif;
 }
 
 button {
@@ -34,12 +44,6 @@ button {
 #status {
   color: black;
   font-size: 20px;
-  text-decoration: underline;
-  /*display: flex;
-  align-content: center;
-  position: center;
-  margin: auto;
-  padding: 20px;*/
 }
 
 #turn {
@@ -50,7 +54,6 @@ button {
 
 .score {
   color: black;
-
 }
 
 #first-deck {
@@ -67,6 +70,7 @@ button {
   display: flex;
   width: 225px;
   height: 360px;
+  /*background-image: url("../images/back.png");*/
   background-color: ivory;
   position: center;
   margin: auto;
@@ -77,6 +81,7 @@ button {
   display: flex;
   width: 225px;
   height: 360px;
+  /*background-image: url("../images/back.png");*/
   background-color: ivory;
   position: center;
   margin: auto;
@@ -91,4 +96,5 @@ img {
 footer {
   font-size: 10px;
   color: #5C606B;
+  font-family: 'Prompt', sans-serif;
 }
