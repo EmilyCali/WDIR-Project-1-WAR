@@ -209,7 +209,7 @@ $(function() {
       $handOne.shift();
       tieCards.push($handTwo[0]);
       $handTwo.shift();
-    };
+    }
   };
   //};
 
@@ -220,8 +220,8 @@ $(function() {
     handOneImg.attr("src", $handOne[0].src);
     turnPhrase.text("Player 2 Draw!")
     if ($handOne.length === 0) {
-      roundWinner();
       //replenishHandOne();
+      roundWinner();
     }
   };
 
@@ -232,27 +232,29 @@ $(function() {
     turnPhrase.text("Player 1 Draw!");
     compareCards();
     if ($handTwo.length === 0) {
-      roundWinner();
       //replenishHandTwo();
+      roundWinner();
     }
   };
 
   //check win for rounds
   var roundWinner = function() {
+    replenishHandOne();
+    replenishHandTwo();
     //if ($handOne.length === 0 && $handTwo.length === 0) {
-    if (playerOneWonCards.length > playerTwoWonCards.length) {
+    if ($handOne.length > $handTwo.length) {
       pOneScore++
       $status.text("Player 1 Wins the Round!");
       $playerOneScore.text("Player One Score: " + pOneScore);
       $playerTwoScore.text("Player Two Score: " + pTwoScore);
       //if ($handOne.length === 0){
-        replenishHandOne();
+        //replenishHandOne();
       //};
       //if ($handTwo.length === 0){
-        replenishHandTwo();
+        //replenishHandTwo();
       //};
 
-    } else if (playerOneWonCards.length < playerTwoWonCards.length) {
+    } else if ($handOne.length < $handTwo.length) {
       pTwoScore++
       $status.text("Player Two Wins the Round!");
       $playerOneScore.text("Player One Score: " + pOneScore);
@@ -260,35 +262,37 @@ $(function() {
       //console.log($handOne);
       //console.log($handTwo);
       //if ($handOne.length === 0){
-        replenishHandOne();
+        //replenishHandOne();
       //};
       //if ($handTwo.length === 0){
-        replenishHandTwo();
+        //replenishHandTwo();
       //};
 
-    } else if (playerOneWonCards.length === playerTwoWonCards.length) {
+    } else if ($handOne.length === $handTwo.length) {
       $status.text("Tied Round! Keep Playing!");
       $playerOneScore.text("Player One Score: " + pOneScore);
       $playerTwoScore.text("Player Two Score: " + pTwoScore);
       //console.log($handOne);
       //console.log($handTwo);
       //if ($handOne.length === 0){
-        replenishHandOne();
+        //replenishHandOne();
       //};
       //if ($handTwo.length === 0){
-        replenishHandTwo();
+        //replenishHandTwo();
       //};
     };
     console.log($handOne.length);
     console.log($handTwo.length);
     console.log(tieCards.length);
+    console.log(playerOneWonCards.length);
+    console.log(playerTwoWonCards.length);
     gameWin();
   };
 
   //fills the empty handone with cards from the player one won cards and empties that won cards array
   var replenishHandOne = function() {
     //handone = player on won
-    $handOne.concat(playerOneWonCards);
+    $handOne = playerOneWonCards;
     playerOneWonCards = [];
     //console.log($handOne);
     //console.log(playerOneWonCards.length);
@@ -298,7 +302,7 @@ $(function() {
   //fills the empty handtwo with cards from the player two won cards and empties that won cards array
   var replenishHandTwo = function() {
     // handtwo= playertwowoncards
-    $handTwo.concat(playerTwoWonCards);
+    $handTwo = playerTwoWonCards;
     playerTwoWonCards = [];
     //console.log($handTwo);
     //console.log(playerTwoWonCards.length);
