@@ -167,13 +167,13 @@ $(function() {
       playerOneWonCards.push($handTwo[0]);
       $handTwo.shift();
       $status.text("Player One Won the Hand!");
-      console.log("p1 before move" + playerOneWonCards.length);
+      //console.log("p1 before move" + playerOneWonCards.length);
       //gets the tie cards since tie cards are being taken out of play and need to go to the next draw winner
       if (tieCards.length > 0) {
-        console.log("player one won cards length: " + playerOneWonCards.length);
+        //console.log("player one won cards length: " + playerOneWonCards.length);
         for (var i = 0; i < tieCards.length; i++) {
           playerOneWonCards.push(tieCards[i]);
-          console.log("after getting the tie cards player one has this many cards: " + playerOneWonCards.length);
+          //console.log("after getting the tie cards player one has this many cards: " + playerOneWonCards.length);
         };
         tieCards = [];
       };
@@ -185,13 +185,13 @@ $(function() {
       playerTwoWonCards.push($handTwo[0]);
       $handTwo.shift();
       $status.text("Player Two Won the Hand!");
-      console.log("p2 before move" + playerTwoWonCards.length);
+      //console.log("p2 before move" + playerTwoWonCards.length);
 
       if (tieCards.length > 0) {
-        console.log("player2 won cards length: " + playerTwoWonCards.length);
+        //console.log("player2 won cards length: " + playerTwoWonCards.length);
         for (var i = 0; i < tieCards.length; i++) {
           playerTwoWonCards.push(tieCards[i]);
-          console.log("after getting the tie cards player two has this many cards: " + playerTwoWonCards.length);
+          //console.log("after getting the tie cards player two has this many cards: " + playerTwoWonCards.length);
         };
         tieCards = [];
       };
@@ -203,7 +203,7 @@ $(function() {
       $handOne.shift();
       tieCards.push($handTwo[0]);
       $handTwo.shift();
-      console.log("there are this many tiecards in the tie hand " + tieCards.length);
+      //console.log("there are this many tiecards in the tie hand " + tieCards.length);
     }
   };
   //};
@@ -211,26 +211,28 @@ $(function() {
 
   //turns
   var onClickShowCardOne = function() {
-    var handOneImg = $("#handOneImg");
-    console.log($handOne[0].value + "this is what is in the array for hand one");
-    handOneImg.attr("src", $handOne[0].src);
-    turnPhrase.text("Player 2 Draw!");
     if ($handOne.length === 0) {
       //replenishHandOne();
       roundWinner();
-    }
+    };
+    var $handOneImg = $("#handOneImg");
+    //console.log($handOne);
+    //console.log("=============")
+    //console.log($handOne[0].value + "this is what is in the array for hand one");
+    $handOneImg.attr("src", $handOne[0].src);
+    turnPhrase.text("Player 2 Draw!");
   };
 
   // go to other player and repeat above
   var onClickShowCardTwo = function() {
-    var handTwoImg = $("#handTwoImg");
-    handTwoImg.attr("src", $handTwo[0].src);
-    turnPhrase.text("Player 1 Draw!");
-    compareCards();
     if ($handTwo.length === 0) {
       //replenishHandTwo();
       roundWinner();
-    }
+    };
+    var $handTwoImg = $("#handTwoImg");
+    $handTwoImg.attr("src", $handTwo[0].src);
+    turnPhrase.text("Player 1 Draw!");
+    compareCards();
   };
 
   //check win for rounds

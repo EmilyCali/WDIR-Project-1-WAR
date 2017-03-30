@@ -8,11 +8,20 @@ body {
 }
 
 h1 {
-  color: #5C606B;
+  color: black;
 }
 
-h3 {
+h2 {
+  color: black;
+}
+
+button {
+  font-size: 20px;
+  background-color: #C0BABC;
   color: #5C606B;
+  font-weight: bold;
+  border: 2px #745B5F solid;
+  border-radius: 10px;
 }
 
 #board {
@@ -37,6 +46,11 @@ h3 {
   font-weight: bold;
   color: black;
   font-size: 28px;
+}
+
+.score {
+  color: black;
+
 }
 
 #first-deck {
