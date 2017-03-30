@@ -166,13 +166,30 @@ $(function() {
         playerOneWonCards.push($handTwo[0]);
         $handTwo.shift();
         $status.text("Player One Won the Hand!").css("color", "#5C606B").css("text-decoration", "underline");
+        console.log("p1 before move" + playerOneWonCards.length);
         //gets the tie cards since tie cards are being taken out of play and need to go to the next draw winner
-        if (tieCards.length > 0) {
-          playerOneWonCards.push(tieCards[0]);
-          tieCards.shift();
-          playerOneWonCards.push(tieCards[0]);
-          tieCards.shift();
-        };
+
+         if (tieCards.length > 0) {
+           console.log(tieCards.length + " this many cards are in the tie array");
+           //playerOneWonCards.push(tieCards);
+           //tieCards = [];
+        //   console.log(tieCards.length);
+          for (var i = 0; i < tieCards.length; i++) {
+            playerOneWonCards.push(tieCards[i]);
+        //     tieCards = [];
+          };
+
+          //not working through whole array just grabbing the first one
+          console.log("tie after move" + tieCards);
+          console.log("player one won cards are " + playerOneWonCards.length)
+
+          //only works for the first two cards in the array need to assume there may be more
+          // playerOneWonCards.push(tieCards[0]);
+          // tieCards.shift();
+          // playerOneWonCards.push(tieCards[0]);
+          // tieCards.shift();
+
+        //};
 
       //if player one card is less than player two card
       } else if ($handOne[0].value < $handTwo[0].value) {
@@ -181,13 +198,30 @@ $(function() {
         playerTwoWonCards.push($handTwo[0]);
         $handTwo.shift();
         $status.text("Player Two Won the Hand!").css("color", "#5C606B").css("text-decoration", "underline");
+        console.log("p2 before move" + playerTwoWonCards.length);
 
-        if (tieCards.length > 0) {
-          playerTwoWonCards.push(tieCards[0]);
-          tieCards.shift();
-          playerTwoWonCards.push(tieCards[0]);
-          tieCards.shift();
-        };
+         if (tieCards.length > 0) {
+           console.log(tieCards.length + " this many cards are in the tie array")
+           playerTwoWonCards.push.apply(tieCards);
+           //tieCards = [];
+        //   console.log(tieCards.length);
+        //   for (var i = 0; i < tieCards.length; i++) {
+        //     playerTwoWonCards.push(tieCards[i]);
+        //     tiecards = [];
+          };
+
+           //not working through array just grabbing the first one
+          //playerTwoWonCards.push.apply(tieCards);
+          console.log("tie after move" + tieCards.length);
+          console.log("player two won cards are " + playerTwoWonCards.length);
+
+          //only assume there are two cards which may not be the case
+          // playerTwoWonCards.push(tieCards[0]);
+          // tieCards.shift();
+          // playerTwoWonCards.push(tieCards[0]);
+          // tieCards.shift();
+
+        //};
 
       //if there is a tie make pick more cards
       } else if ($handOne[0].value == $handTwo[0].value) {
@@ -200,7 +234,7 @@ $(function() {
         //do the push
       };
     };
-
+};
 //turns
     var onClickShowCardOne = function() {
       var handOneImg = $("#handOneImg");
@@ -208,6 +242,7 @@ $(function() {
       turnPhrase.text("Player 2 Draw!")
       if ($handOne.length === 0) {
         roundWinner();
+        //replenishHandOne();
       }
     };
 
@@ -220,6 +255,7 @@ $(function() {
       compareCards();
       if ($handTwo.length === 0) {
         roundWinner();
+        //replenishHandTwo();
       }
     };
 
@@ -231,32 +267,60 @@ $(function() {
           $status.text("Player 1 Wins the Round!");
           $playerOneScore.text("Player One Score: " + pOneScore);
           $playerTwoScore.text("Player Two Score: " + pTwoScore);
+          if ($handOne.length === 0){
+            replenishHandOne();
+          };
+          if ($handTwo.length === 0){
+            replenishHandTwo();
+          };
 
         } else if (playerOneWonCards.length < playerTwoWonCards.length) {
           pTwoScore++
           $status.text("Player Two Wins the Round!");
           $playerOneScore.text("Player One Score: " + pOneScore);
           $playerTwoScore.text("Player Two Score: " + pTwoScore);
+          //console.log($handOne);
+          //console.log($handTwo);
+          if ($handOne.length === 0){
+            replenishHandOne();
+          };
+          if ($handTwo.length === 0){
+            replenishHandTwo();
+          };
 
         } else if (playerOneWonCards.length === playerTwoWonCards.length) {
           $status.text("Tied Round! Keep Playing!");
           $playerOneScore.text("Player One Score: " + pOneScore);
           $playerTwoScore.text("Player Two Score: " + pTwoScore);
+          //console.log($handOne);
+          //console.log($handTwo);
+          if ($handOne.length === 0){
+            replenishHandOne();
+          };
+          if ($handTwo.length === 0){
+            replenishHandTwo();
+          };
         };
-        $handOne = playerOneWonCards;
-        playerOneWonCards = [];
-        console.log($handOne);
-        //console.log(playerOneWonCards);
-
-        $handTwo = playerTwoWonCards;
-        playerTwoWonCards = [];
-        console.log($handTwo);
-        //console.log(playerTwoWonCards);
-        console.log($handOne.length);
-        console.log($handTwo.length);
-        console.log(tieCards.length);
-
+        //console.log($handOne);
+        //console.log($handTwo);
         gameWin();
+    };
+
+//fills the empty handone with cards from the player one won cards and empties that won cards array
+    var replenishHandOne = function() {
+      $handOne = playerOneWonCards;
+      playerOneWonCards = [];
+      //console.log($handOne);
+      //console.log(playerOneWonCards.length);
+    };
+
+
+//fills the empty handtwo with cards from the player two won cards and empties that won cards array
+    var replenishHandTwo = function() {
+      $handTwo = playerTwoWonCards;
+      playerTwoWonCards = [];
+      //console.log($handTwo);
+      //console.log(playerTwoWonCards.length);
     };
 
 //check win for game
