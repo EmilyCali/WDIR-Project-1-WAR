@@ -288,10 +288,10 @@ $(function() {
 
   //check win for game
   var gameWin = function() {
-    if (playerOneWonCards.length === 52) {
+    if ($handOne.length === 52) {
       //console.log("player one won the game!");
       $status.text("Player One Won the Game!").css("font-weight", "bold").css("color", "ivory");
-    } else if (playerTwoWonCards.length === 52) {
+    } else if ($handTwo.length === 52) {
       //console.log("player two won the game!");
       $status.text("Player Two Won the Game!").css("font-weight", "bold").css("color", "ivory");
     }
