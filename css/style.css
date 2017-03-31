@@ -1,5 +1,5 @@
 body {
-  background-color: #C0BABC; /* For browsers that do not support gradients */
+  background-color: #C0BABC; /* For browsers that do not support gradients LOOKED THIS UP ON W3 SCHOOLS*/
     background: -webkit-linear-gradient(bottom,rgba(192,186,188,0),rgba(192,186,188,1)); /*Safari 5.1-6*/
     background: -o-linear-gradient(bottom,rgba(192,186,188,0),rgba(192,186,188,1)); /*Opera 11.1-12*/
     background: -moz-linear-gradient(bottom,rgba(192,186,188,0),rgba(192,186,188,1)); /*Fx 3.6-15*/
